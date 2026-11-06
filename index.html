@@ -1,0 +1,548 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicación Estudiantil - Proyecto Biología</title>
+    <style>
+        :root {
+            --primary: #2e7d32; 
+            --primary-dark: #1b5e20;
+            --accent: #0288d1; 
+            --bg-light: #f4f6f8;
+            --text-dark: #333333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #a5d6a7;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background: var(--white);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        /* Estilos para la caja de Pregunta de Investigación */
+        .pregunta-investigacion {
+            background-color: #e8f5e9;
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .pregunta-investigacion h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .pregunta-investigacion p {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-style: italic;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .grid-2 img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Estilos para estadísticas/encuesta */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: #f9f9f9;
+            border-left: 5px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-desc {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 4px;
+            height: 8px;
+            width: 100%;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--primary);
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        /* MANUAL DE EMOCIONES INTERACTIVO */
+        .emociones-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .btn-emocion {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            width: 140px;
+        }
+
+        .btn-emocion span {
+            font-size: 3rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-emocion:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .btn-emocion:hover span {
+            transform: scale(1.15);
+        }
+
+        .btn-emocion.selected-feliz {
+            border-color: #2e7d32;
+            background-color: #e8f5e9;
+            color: #1b5e20;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+        }
+
+        .btn-emocion.selected-triste {
+            border-color: #0288d1;
+            background-color: #e1f5fe;
+            color: #01579b;
+            box-shadow: 0 4px 12px rgba(2, 136, 209, 0.2);
+        }
+
+        .btn-emocion.selected-enojado {
+            border-color: #d32f2f;
+            background-color: #ffebee;
+            color: #b71c1c;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
+        }
+
+        .emocion-display {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1.8rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .emocion-display.card-feliz { border-left: 6px solid #2e7d32; }
+        .emocion-display.card-triste { border-left: 6px solid #0288d1; }
+        .emocion-display.card-enojado { border-left: 6px solid #d32f2f; }
+
+        .emocion-display-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .emocion-display-header span {
+            font-size: 2.5rem;
+        }
+
+        .emocion-display-header h3 {
+            font-size: 1.4rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            text-align: center;
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .emociones-selector {
+                gap: 0.8rem;
+            }
+            .btn-emocion {
+                width: 100px;
+                padding: 0.8rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            .btn-emocion span {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Proyecto Biología</div>
+        <nav>
+            <ul>
+                <li><a href="#problema">El Problema</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#manual-emociones">Manual de Emociones</a></li>
+                <li><a href="#entrevista">Encuesta / Datos</a></li>
+                <li><a href="#sociobiologia">Sociobiología y Matriz</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Relaciones Sociales y Comunicación Estudiantil</h1>
+        <p>Un análisis desde la biología sobre el manejo de emociones y las barreras de interacción en la comunidad escolar.</p>
+    </div>
+
+    <div class="container">
+
+        <!-- PLANTEAMIENTO DEL PROBLEMA Y PREGUNTA DE INVESTIGACIÓN -->
+        <section id="problema">
+            <h2>Planteamiento del Problema</h2>
+            
+            <!-- Caja destacada para la pregunta de investigación -->
+            <div class="pregunta-investigacion">
+                <h3>Pregunta de Investigación</h3>
+                <p>«¿De qué manera la creación de una página web educativa sobre inteligencia emocional favorece el aprendizaje, manejo y regulación de las emociones en los estudiantes de la Institución Educativa Eugenio Ferro Falla? (Bisquerra, 2009).»</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <p>En el día a día de nuestra institución educativa, hemos notado que la falta de una comunicación sincera y directa genera constantes malentendidos entre los estudiantes. Esta desconexión afecta la forma en que colaboramos en clase, genera tensiones innecesarias en los descansos y termina dañando el clima general del colegio.</p>
+                    <br>
+                    <p>Desde el punto de vista biológico y social, las personas dependemos del trabajo en equipo y de la interacción constante para adaptarnos a nuestro entorno. Cuando en los salones se crean barreras por falta de empatía o mal manejo del enojo, el grupo se divide y pierde la capacidad de apoyarse de manera efectiva.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80" alt="Estudiantes en el colegio">
+            </div>
+        </section>
+
+        <!-- OBJETIVOS -->
+        <section id="objetivos">
+            <h2>Objetivos del Proyecto</h2>
+            <ul>
+                <li><strong>Objetivo General:</strong> Analizar las causas sociobiológicas que provocan fallas en la comunicación entre estudiantes y ofrecer herramientas prácticas para mejorar la convivencia dentro de la comunidad educativa.</li>
+                <br>
+                <li><strong>Objetivos Específicos:</strong>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Identificar cuáles son los hábitos cotidianos y actitudes que más dificultan el diálogo entre compañeros en los diferentes grados.</li>
+                        <li>Explicar cómo las conductas de grupo, como el aislamiento o la territorialidad, tienen una relación con teorías biológicas sobre la interacción social.</li>
+                        <li>Diseñar una guía sencilla y accesible que les permita a los estudiantes saber cómo reaccionar de manera madura ante emociones como la ira, la tristeza o el aislamiento.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!-- MANUAL DE EMOCIONES INTERACTIVO -->
+        <section id="manual-emociones">
+            <h2>Manual de Manejo de Emociones Estudiantil</h2>
+            <p>A veces nos cuesta entender lo que sentimos durante la jornada escolar o no sabemos bien cómo actuar cuando surgen situaciones difíciles. <strong>Haz clic en el emoji que represente cómo te sientes hoy o cómo te sueles sentir en el colegio</strong> para ver consejos prácticos pensados para ti:</p>
+            
+            <div class="emociones-selector">
+                <button class="btn-emocion" onclick="seleccionarEmocion('feliz', this)">
+                    <span>😊</span>
+                    Feliz
+                </button>
+                <button class="btn-emocion" onclick="seleccionarEmocion('triste', this)">
+                    <span>😢</span>
+                    Triste
+                </button>
+                <button class="btn-emocion" onclick="seleccionarEmocion('enojado', this)">
+                    <span>😡</span>
+                    Enojado
+                </button>
+            </div>
+
+            <div id="emocion-display" class="emocion-display">
+                <div class="emocion-display-header">
+                    <span id="emocion-icon"></span>
+                    <h3 id="emocion-title"></h3>
+                </div>
+                <div id="emocion-body"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ENTREVISTA / DATOS -->
+        <section id="entrevista">
+            <h2>Resultados de Encuesta y Percepción Estudiantil</h2>
+            <p>Con el fin de obtener un panorama real sobre la convivencia en el colegio, realizamos una serie de preguntas a compañeros de distintas jornadas y cursos. A través de este sondeo, identificamos tres posturas principales sobre cómo influye la comunicación en sus relaciones cotidianas:</p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-percentage">62%</div>
+                    <div class="stat-desc">Manifiesta que la mayoría de los desacuerdos crecen innecesariamente debido a que las partes prefieren mantener su orgullo o demostrar quién tiene la razón, en lugar de sentarse a conversar y buscar soluciones pacíficas.</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 62%;"></div></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-percentage">23%</div>
+                    <div class="stat-desc">Expresa sentirse excluido o incómodo de manera frecuente al tener que interactuar con grupos con los que no coincide, prefiriendo aislarse durante las pausas o trabajos en clase por temor al rechazo.</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 23%;"></div></div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-percentage">15%</div>
+                    <div class="stat-desc">Considera que en su entorno existe una comunicación clara y respetuosa, donde los inconvenientes leves se resuelven a tiempo conversando sin llegar a discusiones fuertes ni faltas de respeto.</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIOBIOLOGÍA Y MATRIZ -->
+        <section id="sociobiologia">
+            <h2>Sociobiología y Análisis</h2>
+            <p>La sociobiología se encarga de estudiar las bases biológicas detrás del comportamiento en grupo. En la siguiente tabla relacionamos conceptos biológicos con situaciones reales que ocurren en nuestro colegio:</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto Biológico</th>
+                            <th>Manifestación Estudiantil</th>
+                            <th>Impacto en la Comunidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cooperación e Inclusión</strong></td>
+                            <td>Dificultad para integrar a compañeros de diferentes grupos en tareas o proyectos en clase.</td>
+                            <td>Genera aislamiento, reduce las ganas de participar de algunos alumnos y baja el rendimiento académico grupal.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Territorialidad y Grupos</strong></td>
+                            <td>Marcada separación entre grupos sociales cerrados que no permiten el ingreso de otros compañeros.</td>
+                            <td>Crea barreras invisibles en el patio y los salones, complicando la formación de nuevas amistades y la integración.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Señales de Comunicación</strong></td>
+                            <td>Malas interpretaciones por gestos, tono de voz despectivo o falta de atención al escuchar.</td>
+                            <td>Produce discusiones tontas sin motivo real, distanciamiento entre amigos y falta de empatía entre cursos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Proyecto de Ciencias Naturales</p>
+        <p><small>Diseñado para la comunidad educativa</small></p>
+    </footer>
+    
+       <center>    <p>Grado 1004</p></center> 
+    <script>
+        function seleccionarEmocion(emocion, elemento) {
+            const botones = document.querySelectorAll('.btn-emocion');
+            botones.forEach(btn => {
+                btn.classList.remove('selected-feliz', 'selected-triste', 'selected-enojado');
+            });
+
+            const display = document.getElementById('emocion-display');
+            const icon = document.getElementById('emocion-icon');
+            const title = document.getElementById('emocion-title');
+            const body = document.getElementById('emocion-body');
+
+            display.className = 'emocion-display';
+
+            if (emocion === 'feliz') {
+                elemento.classList.add('selected-feliz');
+                display.classList.add('card-feliz');
+                icon.textContent = "😊";
+                title.textContent = "Te sientes Feliz y Tranquilo";
+                title.style.color = "#2e7d32";
+                body.innerHTML = "<p><strong>¿Qué puedes hacer en esta situación?</strong> Tener un buen día es algo genial para contagiar a los demás. Cuando te sientas con buen ánimo, intenta incluir en las conversaciones a compañeros que veas solos durante el descanso. También puedes tomar la iniciativa en las actividades en grupo para motivar a quienes suelen participar menos. Un pequeño gesto de amabilidad o un saludo sincero ayuda mucho a romper las tensiones que existen en el salón.</p>";
+            } else if (emocion === 'triste') {
+                elemento.classList.add('selected-triste');
+                display.classList.add('card-triste');
+                icon.textContent = "😢";
+                title.textContent = "Te sientes Triste o Decaído";
+                title.style.color = "#0288d1";
+                body.innerHTML = "<p><strong>¿Qué puedes hacer en esta situación?</strong> Sentirse triste es completamente normal y no tienes por qué disimularlo o fingir que nada pasa. Lo más valioso en esos momentos es evitar quedarte callado o aislarte por completo en una esquina. Busca a un amigo con quien sientas confianza, o acércate a un profesor u orientador del colegio para contarle qué te pasa. Hablar de lo que sientes ayuda a aliviar el peso emocional y evita que acumules frustración.</p>";
+            } else if (emocion === 'enojado') {
+                elemento.classList.add('selected-enojado');
+                display.classList.add('card-enojado');
+                icon.textContent = "😡";
+                title.textContent = "Te sientes Enojado o Molesto";
+                title.style.color = "#d32f2f";
+                body.innerHTML = "<p><strong>¿Qué puedes hacer en esta situación?</strong> La rabia es una emoción fuerte que suele llevarnos a decir cosas de las que luego nos arrepentimos. Si sientes que estás a punto de discutir con alguien, aplica una regla de oro: haz una pausa, respira profundo y camina unos minutos antes de responder. No resuelvas las cosas en caliente por guardar el orgullo. Una vez que te sientas más tranquilo, habla directamente con la persona para arreglar el problema sin necesidad de gritar o insultar.</p>";
+            }
+
+            display.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
+
+
